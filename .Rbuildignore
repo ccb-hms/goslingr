@@ -6,4 +6,3 @@
 ^yarn\.lock$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^README\.Rmd$
