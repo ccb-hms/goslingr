@@ -1,6 +1,7 @@
 var path = require('path');
 
 module.exports = {
+    mode: 'production',
     entry: path.join(__dirname, 'srcjs', 'goslingr.jsx'),
     output: {
         path: path.join(__dirname, 'inst/htmlwidgets'),
