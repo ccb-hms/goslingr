@@ -51,7 +51,7 @@ spec <- list(
   tracks = list(
     create_track(
       layout = "linear",
-      width = 800,
+      width = 600,
       height = 180,
       mark = "bar",
       x = list(field = "start", type = "genomic", axis = "bottom"),

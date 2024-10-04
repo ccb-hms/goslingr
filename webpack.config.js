@@ -1,4 +1,5 @@
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
     mode: 'production',
@@ -36,5 +37,9 @@ module.exports = {
     stats: {
         colors: true
     },
-    devtool: 'source-map'
+    plugins: [
+        new webpack.optimize.LimitChunkCountPlugin({
+            maxChunks: 1
+        })
+    ]
 };
