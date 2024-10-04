@@ -1,0 +1,67 @@
+---
+title: "Using GRanger object in goslingr"
+output: rmarkdown::html_vignette
+vignette: >
+%\VignetteIndexEntry{Using GRanger object in goslingr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  ---
+  
+  ```{r, include = FALSE}
+knitr::opts_chunk$set(
+collapse = TRUE,
+comment = "#>"
+)
+```
+
+```{r setup, message=FALSE, results="hide"}
+library(goslingr)
+library(GenomicRanges)
+```
+## Getting a sample data for the GRanges object
+
+We will be loading the peaks data from ChipSeq dataset with the GEO accession [GSM1295076](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1295076)
+
+`GSM1295076_CBX6_BF_ChipSeq_mergedReps_peaks.bed.gz` file will be used to create a sample GRanges object.
+
+```{r, reading-data}
+url <- "https://rb.gy/7y3fx"
+temp_file <- file.path(tempdir(), "data.gz")
+download.file(url, destfile = temp_file, method = "auto", mode = "wb")
+df <- read.delim(
+  temp_file,
+  header = FALSE,
+  comment.char = "#",
+  sep = ""
+)
+gr <- GRanges(
+  seqnames = df$V1,
+  ranges = IRanges(df$V2, df$V3, peak = df$V5)
+)
+gr
+```
+## Creating our gosling spec
+
+Now that we have a GRanges object, we can generate our spec:
+```{r}
+
+spec <- list(
+  title = "Basic Marks: bar",
+  subtitle = "Tutorial Examples",
+  tracks = list(
+    create_track(
+      layout = "linear",
+      width = 800,
+      height = 180,
+      mark = "bar",
+      x = list(field = "start", type = "genomic", axis = "bottom"),
+      xe = list(field = "end", type = "genomic"),
+      y = list(field = "peak", type = "quantitative", axis = "right"),
+      size = list(value = 5),
+      data = create_gr_data(gr)
+    )
+  )
+)
+
+goslingr(spec)
+```
