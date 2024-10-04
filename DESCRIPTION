@@ -15,3 +15,7 @@ Imports:
     htmlwidgets,
     reactR,
     jsonlite
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
