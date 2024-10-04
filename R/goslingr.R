@@ -13,10 +13,17 @@ goslingr <- function(spec, width = NULL, height = NULL, elementId = NULL) {
     list(spec = spec)
   )
   
+  params <- reactR::reactMarkup(content)
+  
+  # arguments used by jsonlite::toJSON
+  # see https://www.htmlwidgets.org/develop_advanced.html#custom-json-serializer
+  # 'rows' restores default from 'columns' in htmlwidgets
+  attr(params, 'TOJSON_ARGS') <- list(dataframe = 'rows')
+  
   # create widget
   htmlwidgets::createWidget(
     name = 'goslingr',
-    reactR::reactMarkup(content),
+    x = params,
     width = width,
     height = height,
     package = 'goslingr',
