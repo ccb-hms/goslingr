@@ -2,11 +2,10 @@
 
 S3method(print,GoslingSpec)
 export(GoslingSpec)
+export(bar_chart_spec)
 export(create_gr_data)
-export(create_track)
-export(create_view)
 export(goslingr)
 export(goslingrOutput)
-export(print_spec)
+export(print_list)
 export(renderGoslingr)
 import(htmlwidgets)
