@@ -15,6 +15,7 @@
 #' # example GRanges object
 #' 
 #' library(GenomicRanges)
+#' 
 #' gr <- GRanges(
 #'   seqnames = paste0('chr', c(1:22, 'X', 'Y')),
 #'   peak = rnorm(24, mean = 500, sd = 100),
@@ -95,48 +96,3 @@ print_list <- function(x, indent = 0) {
     cat(x)
   }
 }
-
-
-
-
-gr <- GRanges(
-  seqnames = paste0('chr', c(1:22, 'X', 'Y')),
-  peak = rnorm(24, mean = 500, sd = 100),
-  ranges = IRanges(
-    start = rep(0, 24),
-    end = rep(10, 24)
-  )
-)
-
-spec <- bar_chart_spec(gr)
-
-
-# goslingr(spec)
-# spec <- list(
-#   title = "Basic Marks: bar",
-#   subtitle = "Tutorial Examples",
-#   tracks = list(
-#     list(
-#       layout = "linear",
-#       width = 800,
-#       height = 180,
-#       data = gr_data,
-#       mark = "bar",
-#       x = list(field = "start", type = "genomic", axis = "bottom"),
-#       xe = list(field = "end", type = "genomic"),
-#       y = list(field = "peak", type = "quantitative", axis = "right"),
-#       size = list(value = 5)
-#     )
-#   )
-# )
-# 
-# print_spec(spec)
-# class(spec) <- 'spec'
-# 
-# print(spec)
-# 
-# 
-# 
-# 
-# spec <- bar_chart_spec(gr)
-# goslingr(spec)
