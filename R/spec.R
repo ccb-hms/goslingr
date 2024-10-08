@@ -1,30 +1,15 @@
-#' Add a gosling view
-#'
-#' @param list_obj 
-#' @param ... 
-#'
-#' @return
+#' Constructor function for GoslingSpec
 #' @export
-#'
-#' @examples
-create_view <- function(...) {
-  new_view <- list(...)
-  return(new_view)
+GoslingSpec <- function(spec) {
+  structure(spec, class = 'GoslingSpec')
 }
 
-
-#' Add a gosling track
-#'
-#' @param list_obj 
-#' @param ... 
-#'
-#' @return
+#' Print method for GoslingSpec objects
 #' @export
-#'
-#' @examples
-create_track <- function(...) {
-  new_track <- list(...)
-  return(new_track)
+print.GoslingSpec <- function(x, ...) {
+  cat("GoslingSpec(")
+  print_list(x)
+  cat(")")
 }
 
 #' Create gosling data spec from GRanges object
