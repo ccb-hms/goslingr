@@ -12,11 +12,10 @@ vis <-
 
 
 json_spec <- vis$to_json()
-spec <- jsonlite::fromJSON(vis$to_json(), simplifyDataFrame = FALSE)
-goslingr(spec)
+goslingr(json_spec)
 
 # example 2
-data = gos$multivec(
+data <- gos$multivec(
   url="https://server.gosling-lang.org/api/v1/tileset_info/?d=cistrome-multivec",
   row="sample",
   column="position",
@@ -25,23 +24,23 @@ data = gos$multivec(
   binSize=5,
 )
 
-base_track = gos$Track(data, width=800, height=100)
+base_track <- gos$Track(data, width=800, height=100)
 
-heatmap = base_track$mark_rect()$encode(
+heatmap <- base_track$mark_rect()$encode(
   x=gos$X("start:G", axis="top"),
   xe="end:G",
   row=gos$Row("sample:N", legend=TRUE),
   color=gos$Color("peak:Q", legend=TRUE),
 )
 
-bars = base_track$mark_bar()$encode(
+bars <- base_track$mark_bar()$encode(
   x=gos$X("position:G", axis="top"),
   y="peak:Q",
   row="sample:N",
   color=gos$Color("sample:N", legend=TRUE),
 )
 
-lines = base_track$mark_line()$encode(
+lines <- base_track$mark_line()$encode(
   x=gos$X("position:G", axis="top"),
   y="peak:Q",
   row="sample:N",
@@ -57,8 +56,8 @@ view <- gos$vertical(heatmap, bars, lines)$properties(
 )
 
 
-spec <- jsonlite::fromJSON(view$to_json(), simplifyDataFrame = FALSE)
-goslingr(spec)
+json_spec <- view$to_json()
+goslingr(json_spec)
 
 
 # example 3 ----
@@ -105,6 +104,7 @@ bars <- gos$Track(
   size=gos$SizeValue(5)
 )
 
-spec_json <- bars$view(title="Basic Marks: Bar", subtitle="Tutorial Examples")$to_json()
-spec <- GoslingSpec(jsonlite::fromJSON(spec_json))
-goslingr(spec)
+view <- bars$view(title="Basic Marks: Bar", subtitle="Tutorial Examples")
+
+json_spec <- view$to_json()
+goslingr(json_spec)
