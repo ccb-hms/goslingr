@@ -11,7 +11,7 @@ bar_chart_spec(
   width = 800,
   height = 180,
   y_field = "peak",
-  bin_size = 5,
+  size = 5,
   title = "Basic Marks: bar",
   subtitle = "Tutorial Examples"
 )
@@ -29,11 +29,11 @@ bar_chart_spec(
 
 \item{y_field}{}
 
-\item{bin_size}{}
-
 \item{title}{}
 
 \item{subtitle}{}
+
+\item{bin_size}{}
 }
 \description{
 Title
