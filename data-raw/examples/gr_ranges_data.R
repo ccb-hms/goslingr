@@ -69,3 +69,4 @@ spec <- bar_chart_spec(gr)
 
 # print it for copying/editing in R
 print(spec)
+goslingr(spec)
