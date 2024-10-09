@@ -13,8 +13,5 @@
     "style-loader": "^2.0.0",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2"
-  },
-  "scripts": {
-    "build": "vite build --mode lib"
   }
 }
