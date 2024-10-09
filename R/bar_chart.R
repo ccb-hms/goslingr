@@ -44,7 +44,7 @@ bar_chart_spec <- function(
     width = 800,
     height = 180,
     y_field = "peak",
-    bin_size = 5,
+    size = 5,
     title = "Basic Marks: bar",
     subtitle = "Tutorial Examples"
 ) {
@@ -73,7 +73,7 @@ bar_chart_spec <- function(
         x = list(field = genomic_fields[1], type = "genomic", axis = "bottom"),
         xe = list(field = genomic_fields[2], type = "genomic"),
         y = list(field = y_field, type = "quantitative", axis = "right"),
-        size = list(value = bin_size)
+        size = list(value = size)
       )
     )
   ))
