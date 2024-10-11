@@ -16,16 +16,7 @@ HTMLWidgets.widget({
           
         // convert any long-format json data to wide-format
         const spec = ensureWideJsonData(x.spec);
-    
-        console.log("el!!!!")
-        console.log(el)
-
-        console.log("x!!!!")
-        console.log(x)
-        console.log("spec!!!!")
-        console.log(spec)
-
-        embed(document.getElementById(el.id), spec);
+        embed(el, spec);
 
      
     }
