@@ -1,8 +1,4 @@
-^node_modules$
-^srcjs$
+javascript/*
 ^app\.R$
-^package\.json$
-^webpack\.config\.js$
-^yarn\.lock$
 ^.*\.Rproj$
 ^\.Rproj\.user$

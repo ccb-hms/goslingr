@@ -13,7 +13,6 @@ RoxygenNote: 7.3.2
 Imports: 
     htmltools,
     htmlwidgets,
-    reactR,
     jsonlite
 Suggests: 
     knitr,

@@ -9,7 +9,7 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   output$lollipop <- renderGoslingr({
     lollipop_spec_fpath <- system.file('extdata', 'lollipop_plots_spec.json', package = 'goslingr')
-    lollipop_spec <- jsonlite::read_json(lollipop_spec_fpath)
+    lollipop_spec <- readLines(lollipop_spec_fpath)
     
     goslingr(lollipop_spec)
   })

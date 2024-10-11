@@ -4,7 +4,10 @@
 \alias{goslingr}
 \title{Title TODO}
 \usage{
-goslingr(spec, width = NULL, height = NULL, elementId = NULL)
+goslingr(spec, width = NULL, height = NULL)
+}
+\arguments{
+\item{spec}{Gosling specification either as an R list or as a json string.}
 }
 \description{
 Description TODO

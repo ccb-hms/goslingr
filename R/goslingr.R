@@ -5,47 +5,22 @@
 #' @param spec Gosling specification either as an R list or as a json string.
 #'
 #' @export
-goslingr <- function(spec, width = NULL, height = NULL, elementId = NULL) {
+goslingr <- function(spec, width = NULL, height = NULL) {
   
   # is spec is json string, lets make it an R list
   if (is.character(spec)) {
     spec <- jsonlite::parse_json(spec)
   }
   
-  # describe a React component to send to the browser for rendering.
-  content <- reactR::component(
-    "GoslingComponent", 
-    list(spec = spec)
-  )
-  
-  params <- reactR::reactMarkup(content)
-  
-  # TODO: make dataframeToD3 available in reactR
-  # arguments used by jsonlite::toJSON
-  # see https://www.htmlwidgets.org/develop_advanced.html#custom-json-serializer
-  # 'rows' restores default from 'columns' in htmlwidgets
-  attr(params, 'TOJSON_ARGS') <- list(dataframe = 'rows')
+  x <- list(spec = spec)
   
   # create widget
   htmlwidgets::createWidget(
     name = 'goslingr',
-    x = params,
+    x = x,
     width = width,
     height = height,
-    package = 'goslingr',
-    elementId = elementId
-  )
-}
-
-#' Called by HTMLWidgets to produce the widget's root element.
-#' @noRd
-widget_html.goslingr <- function(id, style, class, ...) {
-  htmltools::tagList(
-    # Necessary for RStudio viewer version < 1.2
-    reactR::html_dependency_corejs(),
-    reactR::html_dependency_react(),
-    reactR::html_dependency_reacttools(),
-    htmltools::tags$div(id = id, class = class, style = style)
+    package = 'goslingr'
   )
 }
 
