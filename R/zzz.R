@@ -22,5 +22,24 @@ gos <- NULL
 # =============================================================================
 .onLoad <- function(libname, pkgname) {
   reticulate::use_virtualenv("r-gosling")
-  gos <<- reticulate::import("gosling", delay_load = TRUE)
+  gos <<- reticulate::import("gosling", delay_load = yield_r_to_python)
+}
+
+# setup reticulate to continually yield R <> Python
+# needed to enable local file paths for gosling data
+yield_r_to_python <- function() {
+  
+  # check if packages for local higlass server were installed
+  py_packages <- reticulate::py_list_packages()
+  higlass_server <- all(c('clodius', 'servir') %in% py_packages$package)
+  
+  if (higlass_server) {
+    reticulate::py_run_string("from time import sleep")
+    py_yield_and_register_next_yield <- function() {
+      reticulate::py_eval("sleep(0.001)")
+      later::later(py_yield_and_register_next_yield, .001)
+      invisible()
+    }
+    later::later(py_yield_and_register_next_yield)
+  }
 }
