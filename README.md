@@ -74,6 +74,9 @@ You can alternatively define the specification using the python
 [gos](https://gosling-lang.github.io/gos/index.html) api and then extract
 the JSON specification:
 
+Note that you need to substitute with R 
+equivalents (`$` instead of `.`, `c()` instead of `[]`, `TRUE` instead of `True`, etc).
+
 ``` r
 library(goslingr)
 
@@ -97,8 +100,7 @@ spec <- view$to_json()
 goslingr(spec)
 ```
 
-Note that you need to substitute with R 
-equivalents (`$` instead of `.`, `c()` instead of `[]`, `TRUE` instead of `True`, etc).
+
 
 Finally, you can provide the specification as a JSON string (useful for getting
 started from [gosling.js examples](http://gosling-lang.org/examples/)):
