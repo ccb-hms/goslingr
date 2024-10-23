@@ -18,6 +18,8 @@
 #' @param envname `character`, name of python environment into which to install (default is `'r-gosling'`)
 #' @param version `character`, version of Gos to install. For general use of this package,
 #' @param new_env `boolean`, should the existing python environment recreated before installation.
+#' @param higlass_server `boolean`, if `TRUE` (default), installs `clodius` and `servir` so that
+#'  local files will be served by a background Higlass server.
 #' @param ... other arguments sent to `reticulate::py_install()`
 #'
 #' @return invisible `NULL`, called for side-effects
@@ -27,17 +29,22 @@
 install_gosling <- function(envname = "r-gosling",
                             version = NULL,
                             new_env = identical(envname, "r-gosling"),
+                            higlass_server = TRUE,
                             ...) {
   
   if(new_env && reticulate::virtualenv_exists(envname))
     reticulate::virtualenv_remove(envname)
   
-  gosling_pkg <- "gosling"
+  packages <- "gosling"
   
   if (!is.null(version)) {
-    gosling_pkg <- paste(gosling_pkg, version, sep = "==")
+    packages <- paste(packages, version, sep = "==")
   }
   
-  reticulate::py_install(gosling_pkg, envname = envname, ...)
+  if (higlass_server) {
+    packages <- c(packages, 'clodius', 'servir')
+  }
+  
+  reticulate::py_install(packages, envname = envname, ...)
   invisible(NULL)
 }
