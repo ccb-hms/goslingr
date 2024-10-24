@@ -21,7 +21,7 @@ gos <- NULL
 # To change the supported Python version, set the option in .onLoad
 # =============================================================================
 .onLoad <- function(libname, pkgname) {
-  reticulate::use_virtualenv("r-gosling")
+  reticulate::use_virtualenv("r-gosling", required = FALSE)
   gos <<- reticulate::import("gosling", delay_load = yield_r_to_python)
 }
 
