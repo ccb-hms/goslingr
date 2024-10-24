@@ -54,16 +54,28 @@ local_data_to_gos <- function(data_entry) {
   # e.g. gos$multivec(...) which generates localhost urls
   data_type <- data_entry$type
   
+  # ensure gos installed and includes clodius/servir
+  check_gos_can_serve_local_data()
+  
   # ensure we have gos loaded from reticulate
-  load_gos()
+  # need if first call to gos is gos[[data_type]](...) but not e.g. gos$multivec(...)
+  # fixed by rstudio/reticulate#1689
+  invisible(gos$data)
   
   data_entry$type <- NULL
   new_data <- do.call(gos[[data_type]], data_entry)
   return(new_data)
 }
 
-# need if first call to gos is gos[[data_type]](...) but not e.g. gos$multivec(...)
-load_gos <- function() {
+check_gos_can_serve_local_data <- function() {
+  py_need <- c('gosling', 'clodius', 'servir')
+  
+  py_packages <- reticulate::py_list_packages()$package
+  if (!all(py_need %in% py_packages))
+    stop('Need python packages gosling, clodius, and servir. Please run 
+         goslingr::install_gosling(higlass_server = TRUE) to use local data files.')
+  
+  
   invisible(gos$data)
 }
 
