@@ -25,7 +25,7 @@ values <- as.data.frame(gr)
 gr_data <- list(
   type = "json",
   chromosomeField = "seqnames",
-  genomicFields = c("start", "end"),
+  genomicFields = list("start", "end"),
   values = values
 )
 

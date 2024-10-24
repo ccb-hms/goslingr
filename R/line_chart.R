@@ -36,7 +36,7 @@
 #' print(spec)
 #' 
 #' goslingr(spec)
-
+#' 
 line_chart_spec <- function(
     gpos, 
     chromosome_field = "seqnames", 

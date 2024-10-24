@@ -8,6 +8,7 @@ install_gosling(
   envname = "r-gosling",
   version = NULL,
   new_env = identical(envname, "r-gosling"),
+  higlass_server = TRUE,
   ...
 )
 }
@@ -17,6 +18,9 @@ install_gosling(
 \item{version}{\code{character}, version of Gos to install. For general use of this package,}
 
 \item{new_env}{\code{boolean}, should the existing python environment recreated before installation.}
+
+\item{higlass_server}{\code{boolean}, if \code{TRUE} (default), installs \code{clodius} and \code{servir} so that
+local files will be served by a background Higlass server.}
 
 \item{...}{other arguments sent to \code{reticulate::py_install()}}
 }

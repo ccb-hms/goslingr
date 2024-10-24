@@ -56,7 +56,7 @@ bar_chart_spec <- function(
   gr_data <- list(
     type = "json",
     chromosomeField = chromosome_field,
-    genomicFields = genomic_fields,
+    genomicFields = list(genomic_fields),
     values = values
   )
   
