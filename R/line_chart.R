@@ -15,23 +15,27 @@
 #'
 #' @examples
 #' 
-#' # generate example GRanges object
+#' # generate example GPos object
 #' library(GenomicRanges)
 #' set.seed(42)
-#'
-#' gpos <- GPos(c("chr1:1-20000000", "chr1:5-10", "chr2:2-5", "chr3:500-605", "chr4:700-800"))
-#' npos <- length(gpos)
-#' mcols(gpos)$counts <- sample(10, npos, replace=TRUE)
 #' 
-#' temp_file <- file.path(tempdir(), 'gr_data.csv')
-#' data.table::fwrite(as.data.frame(gpos), temp_file)
+#' # number of rows per chromosome
+#' n <- 100
+#'
+#' gpos <- GPos(
+#'   seqnames = Rle(rep(paste0("chr", 1:22), each = n)),
+#'   pos = rep(sample(250e6, n), each = 22)
+#' )
+#'
+#' npos <- length(gpos)
+#' mcols(gpos)$counts <- sample(100, npos, replace=TRUE)
+#' 
 #' 
 #' # generate gosling spec and render visualization
-#' spec <- line_chart_spec('http://127.0.0.1:8000/gr_data.csv',  y_field = 'counts')
+#' spec <- line_chart_spec(gpos)
 #' print(spec)
 #' 
 #' goslingr(spec)
-# servr::daemon_stop(3)
 
 line_chart_spec <- function(
     gpos, 
@@ -39,22 +43,21 @@ line_chart_spec <- function(
     genomic_fields = "pos",
     width = 800,
     height = 180,
-    y_field = "peak",
+    y_field = "counts",
     size = 2,
     title = "Basic Marks: line",
     subtitle = "Tutorial Examples"
 ) {
   
   # Extract data from GPos object
-  # values <- as.data.frame(gpos)
+  values <- as.data.frame(gpos)
   
   # construct gosling data spec
   gpos_data <- list(
-    type = "csv",
-    url = gpos,
-    sampleLength = 200000,
+    type = "json",
     chromosomeField = chromosome_field,
-    genomicFields = list(genomic_fields)
+    genomicFields = list(genomic_fields),
+    values = values
   )
   
   
